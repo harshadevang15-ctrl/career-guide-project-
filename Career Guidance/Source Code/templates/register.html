@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register | Career Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Royal gradient */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+            font-size: 26px;
+        }
+
+        form input, form select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #ffffffcc;
+            color: #333;
+            font-size: 14px;
+        }
+
+        form input:focus, form select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #2575fc;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(to right, #5e0dac, #1a5efc);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleExperience() {
+            const status = document.getElementById("work_status").value;
+            document.getElementById("experience_field").style.display = (status === "employee") ? "block" : "none";
+        }
+
+        window.onload = () => toggleExperience();  // initialize visibility based on default value
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Create an Account</h2>
+        <form method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="first_name" placeholder="First Name">
+            <input type="text" name="last_name" placeholder="Last Name">
+            <input type="email" name="email" placeholder="Email">
+            <input type="text" name="phone" placeholder="Phone">
+            <input type="text" name="skills" placeholder="Skills (comma-separated)">
+            <input type="text" name="qualification" placeholder="Highest Qualification">
+            
+            <select name="category">
+                <option value="technical">Technical</option>
+                <option value="non-technical">Non-Technical</option>
+            </select>
+
+            <select name="work_status" id="work_status" onchange="toggleExperience()">
+                <option value="student">Student</option>
+                <option value="employee">Employee</option>
+            </select>
+
+            <div id="experience_field" class="hidden">
+                <input type="text" name="experience" placeholder="Years of Experience">
+            </div>
+
+            <input type="text" name="interested_fields" placeholder="Interested Fields">
+            <input type="text" name="course_completion" placeholder="Course Completion (optional)">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="confirm_password" placeholder="Confirm Password">
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+</body>
+</html>

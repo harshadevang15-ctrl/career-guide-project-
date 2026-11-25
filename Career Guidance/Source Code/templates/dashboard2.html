@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #2b5876, #4e4376); /* Royal gradient */
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .profile-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: background 0.3s ease;
+        }
+
+        .profile-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 100px auto 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .user-info p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .logout-btn,
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 5px 0 0;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        .logout-btn:hover {
+            background-color: #e33434;
+        }
+
+        .action-btn {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        .action-btn:hover {
+            background: linear-gradient(to right, #5311cb, #1450d1);
+        }
+
+        .action-btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            transition: 0.3s ease;
+        }
+
+        .fixed-top {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .below-container {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 80px 20px 30px;
+            }
+            .profile-icon {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Profile Icon -->
+    <div class="profile-icon" onclick="toggleContainer()">👤</div>
+
+    <!-- Action Buttons -->
+    <div class="action-btn-container fixed-top" id="buttonContainer">
+        <a href="{{ url_for('skillset') }}"><button class="action-btn">Skill Set</button></a>
+
+        {% if category == 'technical' %}
+            <a href="{{ url_for('skillset') }}"><button class="action-btn">Technical</button></a>
+        {% elif category == 'non-technical' %}
+            <a href="{{ url_for('skillset') }}"><button class="action-btn">Non-Technical</button></a>
+        {% endif %}
+
+        <a href="{{ url_for('skillset') }}"><button class="action-btn">High School</button></a>
+    </div>
+
+    <!-- Profile Container -->
+    <div class="container" id="profileContainer">
+        <h1>Welcome, {{ first_name }}!</h1>
+        <div class="user-info">
+            <p><strong>Username:</strong> {{ username }}</p>
+            <p><strong>Email:</strong> {{ email }}</p>
+            <p><strong>Phone:</strong> {{ phone }}</p>
+            <p><strong>Skills:</strong> {{ skills }}</p>
+            <p><strong>Qualification:</strong> {{ qualification }}</p>
+            <p><strong>Work Status:</strong> {{ work_status }}</p>
+            <p><strong>Experience:</strong> {{ experience }}</p>
+            <p><strong>Interested Fields:</strong> {{ interested_fields }}</p>
+            <p><strong>Course Completion:</strong> {{ course_completion }}</p>
+        </div>
+
+        <a href="{{ url_for('logout') }}"><button class="logout-btn">Logout</button></a>
+
+        <h3 style="margin-top: 30px;">Additional Actions</h3>
+        <a href="{{ url_for('edit_profile') }}"><button class="action-btn">Edit Profile</button></a>
+        <a href="{{ url_for('view_skills') }}"><button class="action-btn">View Skills</button></a>
+    </div>
+
+    <script>
+        function toggleContainer() {
+            const container = document.getElementById('profileContainer');
+            const buttonContainer = document.getElementById('buttonContainer');
+            const isHidden = container.style.display === 'none' || container.style.display === '';
+
+            container.style.display = isHidden ? 'block' : 'none';
+            buttonContainer.classList.toggle('fixed-top', !isHidden);
+            buttonContainer.classList.toggle('below-container', isHidden);
+        }
+    </script>
+
+</body>
+</html>

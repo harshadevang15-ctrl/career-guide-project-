@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skill Quiz</title>
+</head>
+<body>
+    <h2>Question {{ index }}</h2>
+    <p>{{ question.question }}</p>
+    <form method="POST">
+        {% for opt in question.options %}
+            <label>
+                <input type="radio" name="answer" value="{{ opt[0]|lower }}" required> {{ opt }}
+            </label><br>
+        {% endfor %}
+        <button type="submit">Next</button>
+    </form>
+</body>
+</html>

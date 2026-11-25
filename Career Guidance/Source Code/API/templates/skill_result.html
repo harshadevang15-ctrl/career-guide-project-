@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Result</title>
+</head>
+<body>
+    <h2>Quiz Results</h2>
+    <p>Your Score: {{ score }} / {{ total }}</p>
+    <ul>
+        {% for r in results %}
+            <li>
+                Q{{ r.q_num }}: 
+                {% if r.is_correct %}
+                    ✅ Correct
+                {% else %}
+                    ❌ Your answer: {{ r.your_answer|upper }}, Correct: {{ r.correct_answer|upper }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if career_guidance %}
+        <h3>Career Guidance & Suggestions</h3>
+        <p>{{ career_guidance }}</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4e54c8, #8f94fb); /* Royal gradient */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container Styles */
+.result-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    width: 90%;
+    max-width: 800px; /* Updated max width */
+    text-align: center;
+    box-sizing: border-box;
+    max-height: 70vh; /* Limit the height of the container */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #00c9a7;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 0;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00b89f;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .result-container {
+                padding: 20px;
+                width: 95%;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            p, li {
+                font-size: 18px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .result-container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            p, li {
+                font-size: 16px;
+            }
+
+            button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h2>Quiz Results</h2>
+        <p>Your Score: {{ score }} / {{ total }}</p>
+
+        <ul>
+            {% for r in results %}
+                <li>
+                    Q{{ r.q_num }}: 
+                    {% if r.is_correct %}
+                        ✅ Correct
+                    {% else %}
+                        ❌ Your answer: {{ r.your_answer|upper }}, Correct: {{ r.correct_answer|upper }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h3>Career Guidance & Suggestions</h3>
+        <p>{{ career_guidance }}</p>
+
+        <h3>Click a button to get recommendations:</h3>
+        <div>
+            <a href="{{ url_for('recommendation', category='skillset') }}">
+                <button>Skill Set</button>
+            </a>
+            <a href="{{ url_for('recommendation', category='technical') }}">
+                <button>Technical</button>
+            </a>
+            <a href="{{ url_for('recommendation', category='non-technical') }}">
+                <button>Non-Technical</button>
+            </a>
+            <a href="{{ url_for('recommendation', category='High School') }}">
+                <button>High School</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

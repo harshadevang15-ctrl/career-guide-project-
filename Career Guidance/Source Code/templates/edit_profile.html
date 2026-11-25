@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2); /* Royal gradient */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .form-container input[type="submit"] {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background: linear-gradient(to right, #0072ff, #0052cc);
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Edit Profile</h1>
+        <form method="POST">
+            <label>First Name:</label>
+            <input type="text" name="first_name" value="{{ first_name }}" required>
+
+            <label>Last Name:</label>
+            <input type="text" name="last_name" value="{{ last_name }}">
+
+            <label>Email:</label>
+            <input type="email" name="email" value="{{ email }}">
+
+            <label>Phone:</label>
+            <input type="text" name="phone" value="{{ phone }}">
+
+            <label>Skills:</label>
+            <input type="text" name="skills" value="{{ skills }}">
+
+            <label>Qualification:</label>
+            <input type="text" name="qualification" value="{{ qualification }}">
+
+            <label>Work Status:</label>
+            <select name="work_status">
+                <option value="student" {% if work_status == 'student' %}selected{% endif %}>Student</option>
+                <option value="employee" {% if work_status == 'employee' %}selected{% endif %}>Employee</option>
+            </select>
+
+            <label>Experience:</label>
+            <input type="text" name="experience" value="{{ experience }}">
+
+            <label>Interested Fields:</label>
+            <input type="text" name="interested_fields" value="{{ interested_fields }}">
+
+            <label>Course Completion:</label>
+            <input type="text" name="course_completion" value="{{ course_completion }}">
+
+            <input type="submit" value="Save Changes">
+        </form>
+    </div>
+</body>
+</html>
